@@ -161,9 +161,10 @@ class _PaystackPayNowState extends State<PaystackPayNow> {
                 ),
                 backgroundColor: Colors.white,
               ),
-              body: WebView(
-                initialUrl: snapshot.data!.authUrl,
-                javascriptMode: JavascriptMode.unrestricted,
+              body: WebViewWidget(
+                controller: WebViewController()
+                  ..setJavaScriptMode(JavaScriptMode.unrestricted)
+                  ..loadRequest(Uri.parse(snapshot.data!.authUrl)),
               ));
         } else if (snapshot.hasError) {
           return Text('${snapshot.error}');
